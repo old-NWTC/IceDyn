@@ -1,24 +1,27 @@
 !STARTOFREGISTRYGENERATEDFILE './IceDyn_Types.f90'
-
+!
 ! WARNING This file is generated automatically by the FAST registry
 ! Do not edit.  Your changes to this file will be lost.
 !
+! FAST Registry (v2.02.03, 7-Apr-2014)
 !*********************************************************************************************************************************
 ! IceDyn_Types
 !.................................................................................................................................
-! LICENSING
-! Copyright (C) 2012 National Renewable Energy Laboratory
-!
 ! This file is part of IceDyn.
 !
-! IceDyn is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as
-! published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+! Copyright (C) 2012-2014 National Renewable Energy Laboratory
 !
-! This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty
-! of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+! Licensed under the Apache License, Version 2.0 (the "License");
+! you may not use this file except in compliance with the License.
+! You may obtain a copy of the License at
 !
-! You should have received a copy of the GNU General Public License along with IceDyn.
-! If not, see <http://www.gnu.org/licenses/>.
+!     http://www.apache.org/licenses/LICENSE-2.0
+!
+! Unless required by applicable law or agreed to in writing, software
+! distributed under the License is distributed on an "AS IS" BASIS,
+! WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+! See the License for the specific language governing permissions and
+! limitations under the License.
 !
 !
 ! W A R N I N G : This file was automatically generated from the FAST registry.  Changes made to this file may be lost.
@@ -32,191 +35,191 @@ USE NWTC_Library
 IMPLICIT NONE
 ! =========  ID_InputFile  =======
   TYPE, PUBLIC :: ID_InputFile
-    INTEGER(IntKi)  :: IceModel 
-    INTEGER(IntKi)  :: IceSubModel 
-    REAL(ReKi)  :: StrWd 
-    REAL(ReKi)  :: h 
-    REAL(ReKi)  :: v 
-    REAL(ReKi)  :: InitLoc 
-    REAL(ReKi)  :: t0 
-    REAL(ReKi)  :: rhow 
-    REAL(ReKi)  :: rhoi 
-    REAL(ReKi)  :: Ikm 
-    REAL(ReKi)  :: Ag 
-    REAL(ReKi)  :: Qg 
-    REAL(ReKi)  :: Rg 
-    REAL(ReKi)  :: Tice 
-    REAL(ReKi)  :: nu 
-    REAL(ReKi)  :: phi 
-    REAL(ReKi)  :: SigN 
-    REAL(ReKi)  :: Eice 
-    REAL(ReKi)  :: IceStr2 
-    REAL(ReKi)  :: Delmax2 
-    REAL(ReKi)  :: Pitch 
-    REAL(ReKi)  :: miuh 
-    REAL(ReKi)  :: varh 
-    REAL(ReKi)  :: miuv 
-    REAL(ReKi)  :: varv 
-    REAL(ReKi)  :: miut 
-    REAL(ReKi)  :: miubr 
-    REAL(ReKi)  :: varbr 
-    REAL(ReKi)  :: miuDelm 
-    REAL(ReKi)  :: varDelm 
-    REAL(ReKi)  :: miuP 
-    REAL(ReKi)  :: varP 
-    INTEGER(IntKi)  :: Zn1 
-    INTEGER(IntKi)  :: Zn2 
-    REAL(ReKi)  :: ZonePitch 
-    REAL(ReKi)  :: PrflMean 
-    REAL(ReKi)  :: PrflSig 
-    REAL(ReKi)  :: IceStr 
-    REAL(ReKi)  :: Delmax 
-    REAL(ReKi)  :: alpha 
-    REAL(ReKi)  :: Dwl 
-    REAL(ReKi)  :: Dtp 
-    REAL(ReKi)  :: hr 
-    REAL(ReKi)  :: mu 
-    REAL(ReKi)  :: sigf 
-    REAL(ReKi)  :: StrLim 
-    REAL(ReKi)  :: StrRtLim 
-    INTEGER(IntKi)  :: UorD 
-    REAL(ReKi)  :: Ll 
-    REAL(ReKi)  :: Lw 
-    REAL(ReKi)  :: Cpa 
-    REAL(ReKi)  :: dpa 
-    REAL(ReKi)  :: Fdr 
-    REAL(ReKi)  :: Kic 
-    REAL(ReKi)  :: FspN 
+    INTEGER(IntKi)  :: IceModel      ! The current ice model number [-]
+    INTEGER(IntKi)  :: IceSubModel      ! The current ice sub-model number [-]
+    REAL(ReKi)  :: StrWd      ! The width of the structure [m]
+    REAL(ReKi)  :: h      ! Ice thickness [m]
+    REAL(ReKi)  :: v      ! Ice velocity [m/s]
+    REAL(ReKi)  :: InitLoc      ! Ice sheet initial location [m]
+    REAL(ReKi)  :: t0      ! Ice load starting time [s]
+    REAL(ReKi)  :: rhow      ! Water mass density [kg/m^3]
+    REAL(ReKi)  :: rhoi      ! Ice mass density [kg/m^3]
+    REAL(ReKi)  :: Ikm      ! Indentation factor [-]
+    REAL(ReKi)  :: Ag      ! Ice crystal type factor [MPa^-3s^-1]
+    REAL(ReKi)  :: Qg      ! Activation energy [kJ]
+    REAL(ReKi)  :: Rg      ! Universal gas constant [J]
+    REAL(ReKi)  :: Tice      ! Ice temperature [K]
+    REAL(ReKi)  :: nu      ! Poison ratio of ice [-]
+    REAL(ReKi)  :: phi      ! Ice wedge angle [degree]
+    REAL(ReKi)  :: SigN      ! Nominal ice strength [MPa]
+    REAL(ReKi)  :: Eice      ! Elastic modulus of ice [GPa]
+    REAL(ReKi)  :: IceStr2      ! Ice tooth brittle strength [MPa]
+    REAL(ReKi)  :: Delmax2      ! Ice tooth maximum elastic deformation for model 2 [m]
+    REAL(ReKi)  :: Pitch      ! Distance between sequential ice teeth [m]
+    REAL(ReKi)  :: miuh      ! Mean value of random ice thickness [m]
+    REAL(ReKi)  :: varh      ! Variance of random ice thickness  [m^2]
+    REAL(ReKi)  :: miuv      ! Mean value of random ice velocity [m/s]
+    REAL(ReKi)  :: varv      ! Variance of random ice velocity  [m^2/s^2]
+    REAL(ReKi)  :: miut      ! Mean value of ice loading event duration time [s]
+    REAL(ReKi)  :: miubr      ! Mean value of random ice brittle strength [MPa]
+    REAL(ReKi)  :: varbr      ! Variance of random ice brittle strength [MPa^2]
+    REAL(ReKi)  :: miuDelm      ! Mean value of random random maximum ice tooth tip displacement [MPa]
+    REAL(ReKi)  :: varDelm      ! Variance of random random maximum ice tooth tip displacement [MPa^2]
+    REAL(ReKi)  :: miuP      ! Mean value of random distance between sequential ice teeth [m]
+    REAL(ReKi)  :: varP      ! Variance of random distance between sequential ice teeth [m^2]
+    INTEGER(IntKi)  :: Zn1      ! Number of failure zones along contact width [-]
+    INTEGER(IntKi)  :: Zn2      ! Number of failure zones along contact height/thickness [-]
+    REAL(ReKi)  :: ZonePitch      ! Distance between sequential ice teeth [m]
+    REAL(ReKi)  :: PrflMean      ! Ice structure contact profile mean value [m]
+    REAL(ReKi)  :: PrflSig      ! Ice structure contact profile standard deviation [m]
+    REAL(ReKi)  :: IceStr      ! Ice failure strength [MPa]
+    REAL(ReKi)  :: Delmax      ! Ice teeth maximum elastic deformation [m]
+    REAL(ReKi)  :: alpha      ! slope angle of the cone [degree]
+    REAL(ReKi)  :: Dwl      ! cone waterline diameter [m]
+    REAL(ReKi)  :: Dtp      ! cone top diameter [m]
+    REAL(ReKi)  :: hr      ! ride-up ice thickness [m]
+    REAL(ReKi)  :: mu      ! friction coefficient between structure and ice [-]
+    REAL(ReKi)  :: sigf      ! flexural strength of ice [MPa]
+    REAL(ReKi)  :: StrLim      ! limit strain [-]
+    REAL(ReKi)  :: StrRtLim      ! limit strain rate [s^-1]
+    INTEGER(IntKi)  :: UorD      ! flag that indicates upward or downward breaking cone: 0,upward, 1,downward. [-]
+    REAL(ReKi)  :: Ll      ! Ice floe length [m]
+    REAL(ReKi)  :: Lw      ! Ice floe width [m]
+    REAL(ReKi)  :: Cpa      ! ice crushing strength pressure-area relation constant [-]
+    REAL(ReKi)  :: dpa      ! ice crushing strength pressure-area relation order [-]
+    REAL(ReKi)  :: Fdr      ! Constant external driving force [MN]
+    REAL(ReKi)  :: Kic      ! Fracture toughness of ice [kNm^(-3/2)]
+    REAL(ReKi)  :: FspN      ! Non-dimensional splitting load [-]
   END TYPE ID_InputFile
 ! =======================
 ! =========  ID_InitInputType  =======
   TYPE, PUBLIC :: ID_InitInputType
-    CHARACTER(1024)  :: InputFile 
-    CHARACTER(1024)  :: RootName 
+    CHARACTER(1024)  :: InputFile      ! Name of the input file; remove if there is no file [-]
+    CHARACTER(1024)  :: RootName      ! Root name of the output file [-]
   END TYPE ID_InitInputType
 ! =======================
 ! =========  ID_InitOutputType  =======
   TYPE, PUBLIC :: ID_InitOutputType
-    CHARACTER(10) , DIMENSION(:), ALLOCATABLE  :: WriteOutputHdr 
-    CHARACTER(10) , DIMENSION(:), ALLOCATABLE  :: WriteOutputUnt 
+    CHARACTER(10) , DIMENSION(:), ALLOCATABLE  :: WriteOutputHdr      ! Names of the output-to-file channels [-]
+    CHARACTER(10) , DIMENSION(:), ALLOCATABLE  :: WriteOutputUnt      ! Units of the output-to-file channels [-]
   END TYPE ID_InitOutputType
 ! =======================
 ! =========  ID_ContinuousStateType  =======
   TYPE, PUBLIC :: ID_ContinuousStateType
-    REAL(ReKi)  :: q 
-    REAL(ReKi)  :: dqdt 
+    REAL(ReKi)  :: q      ! q - displacement of ice mass [m]
+    REAL(ReKi)  :: dqdt      ! dqdt - velocity of ice mass [m/s]
   END TYPE ID_ContinuousStateType
 ! =======================
 ! =========  ID_DiscreteStateType  =======
   TYPE, PUBLIC :: ID_DiscreteStateType
-    REAL(ReKi)  :: IceTthNo2 
-    REAL(ReKi) , DIMENSION(:), ALLOCATABLE  :: IceTthNo 
-    REAL(ReKi)  :: Nc 
-    REAL(ReKi)  :: hn 
-    REAL(ReKi)  :: sign 
-    REAL(ReKi)  :: vn 
-    REAL(ReKi)  :: t0n 
-    REAL(ReKi)  :: tmn 
-    REAL(ReKi)  :: ten 
-    REAL(ReKi)  :: Fmaxn 
-    REAL(ReKi)  :: Dmaxn 
-    REAL(ReKi)  :: Pchn 
-    REAL(ReKi)  :: Kn 
-    REAL(ReKi)  :: signext 
-    REAL(ReKi)  :: Dmaxnext 
-    REAL(ReKi)  :: Pchnext 
-    REAL(ReKi)  :: Knext 
-    REAL(ReKi)  :: Psum 
-    REAL(ReKi)  :: dxc 
-    INTEGER(IntKi)  :: Splitf 
-    REAL(ReKi)  :: Beta 
-    REAL(DbKi)  :: Tinit 
+    REAL(ReKi)  :: IceTthNo2      ! Ice tooth number of the current ice tooth [-]
+    REAL(ReKi) , DIMENSION(:), ALLOCATABLE  :: IceTthNo      ! IceTthNo - the current numbers of ice teeth of each zone [-]
+    REAL(ReKi)  :: Nc      ! Number of the current loading event/Ice tooths [-]
+    REAL(ReKi)  :: hn      ! Ice thickness of the current event/ice tooth [m]
+    REAL(ReKi)  :: sign      ! Ice strength of the current event [Pa]
+    REAL(ReKi)  :: vn      ! Ice velocity of the current event [m/s]
+    REAL(ReKi)  :: t0n      ! Starting time of the current event [s]
+    REAL(ReKi)  :: tmn      ! Time when the maximum force is reached for the current event [s]
+    REAL(ReKi)  :: ten      ! End time of the current event [s]
+    REAL(ReKi)  :: Fmaxn      ! Maximum ice force of the current event [N]
+    REAL(ReKi)  :: Dmaxn      ! Maximum ice tooth tip displacement of the current ice tooth [m]
+    REAL(ReKi)  :: Pchn      ! Distance between the current ice tooth and the next one  [m]
+    REAL(ReKi)  :: Kn      ! Equivalent elastic stiffness of the current ice tooth [N/m]
+    REAL(ReKi)  :: signext      ! Ice strength of the next ice tooth [Pa]
+    REAL(ReKi)  :: Dmaxnext      ! Maximum ice tooth tip displacement of the next ice tooth [m]
+    REAL(ReKi)  :: Pchnext      ! Distance between the next ice tooth and the one after it [m]
+    REAL(ReKi)  :: Knext      ! Equivalent elastic stiffness of the next ice tooth [N/m]
+    REAL(ReKi)  :: Psum      ! The sum of pitches of all broken ice teeth [m]
+    REAL(ReKi)  :: dxc      ! crushed depth of ice [m]
+    INTEGER(IntKi)  :: Splitf      ! flag to indicate if the ice floe has splitted (0 not splitted, 1 splitted) [-]
+    REAL(ReKi)  :: Beta      ! angel between broken ice sheet and level waterline [rad]
+    REAL(DbKi)  :: Tinit      ! Initial time of the current load cycle [s]
   END TYPE ID_DiscreteStateType
 ! =======================
 ! =========  ID_ConstraintStateType  =======
   TYPE, PUBLIC :: ID_ConstraintStateType
-    REAL(ReKi)  :: DummyConstrState 
+    REAL(ReKi)  :: DummyConstrState      ! A variable, Replace if you have constraint states [-]
   END TYPE ID_ConstraintStateType
 ! =======================
 ! =========  ID_OtherStateType  =======
   TYPE, PUBLIC :: ID_OtherStateType
-    TYPE(ID_ContinuousStateType) , DIMENSION(:), ALLOCATABLE  :: xdot 
-    INTEGER(IntKi)  :: n 
+    TYPE(ID_ContinuousStateType) , DIMENSION(:), ALLOCATABLE  :: xdot      ! previous state deriv for multi-step [m]
+    INTEGER(IntKi)  :: n      ! tracks time step for which OtherState was updated [-]
   END TYPE ID_OtherStateType
 ! =======================
 ! =========  ID_ParameterType  =======
   TYPE, PUBLIC :: ID_ParameterType
-    REAL(ReKi)  :: h 
-    REAL(ReKi)  :: v 
-    REAL(ReKi)  :: t0 
-    REAL(ReKi)  :: StrWd 
-    REAL(ReKi)  :: dt 
-    REAL(ReKi)  :: InitLoc 
-    INTEGER(IntKi)  :: verif 
-    INTEGER(IntKi)  :: ModNo 
-    INTEGER(IntKi)  :: SubModNo 
-    INTEGER(IntKi)  :: NumOuts 
-    INTEGER(IntKi)  :: method 
-    CHARACTER(10) , DIMENSION(:), ALLOCATABLE  :: OutName 
-    CHARACTER(10) , DIMENSION(:), ALLOCATABLE  :: OutUnit 
-    CHARACTER(1024)  :: RootName 
-    REAL(ReKi)  :: tm1a 
-    REAL(ReKi)  :: tm1b 
-    REAL(ReKi)  :: tm1c 
-    REAL(ReKi)  :: Fmax1a 
-    REAL(ReKi)  :: Fmax1b 
-    REAL(ReKi)  :: Fmax1c 
-    REAL(ReKi)  :: Ikm 
-    REAL(ReKi)  :: Cstr 
-    REAL(ReKi)  :: EiPa 
-    REAL(ReKi)  :: Delmax2 
-    REAL(ReKi)  :: Pitch 
-    REAL(ReKi)  :: Kice2 
-    REAL(ReKi)  :: miuh 
-    REAL(ReKi)  :: varh 
-    REAL(ReKi)  :: miuv 
-    REAL(ReKi)  :: varv 
-    REAL(ReKi)  :: miut 
-    REAL(ReKi)  :: miubr 
-    REAL(ReKi)  :: varbr 
-    REAL(ReKi)  :: miuDelm 
-    REAL(ReKi)  :: varDelm 
-    REAL(ReKi)  :: miuP 
-    REAL(ReKi)  :: varP 
-    REAL(ReKi)  :: ZonePitch 
-    REAL(ReKi)  :: Kice 
-    REAL(ReKi)  :: Delmax 
-    REAL(ReKi) , DIMENSION(:), ALLOCATABLE  :: Y0 
-    REAL(ReKi) , DIMENSION(:), ALLOCATABLE  :: ContPrfl 
-    INTEGER(IntKi)  :: Zn 
-    REAL(ReKi)  :: rhoi 
-    REAL(ReKi)  :: rhow 
-    REAL(ReKi)  :: alphaR 
-    REAL(ReKi)  :: Dwl 
-    REAL(ReKi)  :: Zr 
-    REAL(ReKi)  :: RHbr 
-    REAL(ReKi)  :: RVbr 
-    REAL(ReKi)  :: Lbr 
-    REAL(ReKi)  :: LovR 
-    REAL(ReKi)  :: mu 
-    REAL(ReKi)  :: Wri 
-    REAL(ReKi)  :: WL 
-    REAL(ReKi)  :: Cpa 
-    REAL(ReKi)  :: dpa 
-    REAL(ReKi)  :: FdrN 
-    REAL(ReKi)  :: Mice 
-    REAL(ReKi)  :: Fsp 
+    REAL(ReKi)  :: h      ! Ice thickness [m]
+    REAL(ReKi)  :: v      ! Ice velocity [m/s]
+    REAL(ReKi)  :: t0      ! Ice load starting time [s]
+    REAL(ReKi)  :: StrWd      ! The width of the structure [m]
+    REAL(ReKi)  :: dt      ! Time interval for integration within the module [s]
+    REAL(ReKi)  :: InitLoc      ! Ice sheet initial location [m]
+    INTEGER(IntKi)  :: verif      ! flag to indicate if verification is being peformed [-]
+    INTEGER(IntKi)  :: ModNo      ! The current ice model number [-]
+    INTEGER(IntKi)  :: SubModNo      ! The current ice sub-model number [-]
+    INTEGER(IntKi)  :: NumOuts      ! The number of output channels [-]
+    INTEGER(IntKi)  :: method      ! integration method: 1-RK4, 2-AB4, 3-ABM4 [-]
+    CHARACTER(10) , DIMENSION(:), ALLOCATABLE  :: OutName      ! Names of all requested output parameters [-]
+    CHARACTER(10) , DIMENSION(:), ALLOCATABLE  :: OutUnit      ! Units of all requested output parameters [-]
+    CHARACTER(1024)  :: RootName      ! Rootname [-]
+    REAL(ReKi)  :: tm1a      ! Time for the maximum force to be reached for model 1a  [s]
+    REAL(ReKi)  :: tm1b      ! Time for the maximum force to be reached for model 1b [s]
+    REAL(ReKi)  :: tm1c      ! Time for the maximum force to be reached for model 1c [s]
+    REAL(ReKi)  :: Fmax1a      ! Maximum ice force of model 1a [N]
+    REAL(ReKi)  :: Fmax1b      ! Maximum ice force of model 1b [N]
+    REAL(ReKi)  :: Fmax1c      ! Maximum ice force of model 1c [N]
+    REAL(ReKi)  :: Ikm      ! Indentation factor [-]
+    REAL(ReKi)  :: Cstr      ! Constant when calculating creeping stresss [Pa*s^(-1/3)]
+    REAL(ReKi)  :: EiPa      ! Elastic modulus of ice [Pa]
+    REAL(ReKi)  :: Delmax2      ! Ice tooth maximum elastic deformation for model 2 [m]
+    REAL(ReKi)  :: Pitch      ! Distance between sequential ice teeth [m]
+    REAL(ReKi)  :: Kice2      ! Stiffness of ice teeth for model 2 [N/m]
+    REAL(ReKi)  :: miuh      ! Mean value of random ice thickness [m]
+    REAL(ReKi)  :: varh      ! Variance of random ice thickness  [m^2]
+    REAL(ReKi)  :: miuv      ! Mean value of random ice velocity [m/s]
+    REAL(ReKi)  :: varv      ! Variance of random ice velocity  [m^2/s^2]
+    REAL(ReKi)  :: miut      ! Mean value of ice loading event duration time [s]
+    REAL(ReKi)  :: miubr      ! Mean value of random ice brittle strength [MPa]
+    REAL(ReKi)  :: varbr      ! Variance of random ice brittle strength [MPa^2]
+    REAL(ReKi)  :: miuDelm      ! Mean value of random maximum ice tooth tip displacement [m]
+    REAL(ReKi)  :: varDelm      ! Variance of random maximum ice tooth tip displacement [m^2]
+    REAL(ReKi)  :: miuP      ! Mean value of random distance between sequential ice teeth [m]
+    REAL(ReKi)  :: varP      ! Variance of random distance between sequential ice teeth [m^2]
+    REAL(ReKi)  :: ZonePitch      ! Distance between sequential ice teeth [m]
+    REAL(ReKi)  :: Kice      ! Stiffness of ice teeth [N/m]
+    REAL(ReKi)  :: Delmax      ! Ice teeth maximum elastic deformation [m]
+    REAL(ReKi) , DIMENSION(:), ALLOCATABLE  :: Y0      ! Ice structure contact profile initial location [m]
+    REAL(ReKi) , DIMENSION(:), ALLOCATABLE  :: ContPrfl      ! Ice structure contact profile [m]
+    INTEGER(IntKi)  :: Zn      ! Number of failure zones [-]
+    REAL(ReKi)  :: rhoi      ! Ice mass density  [kg/m^3]
+    REAL(ReKi)  :: rhow      ! Water mass density [kg/m^3]
+    REAL(ReKi)  :: alphaR      ! Slope angle of the cone [rad]
+    REAL(ReKi)  :: Dwl      ! Cone waterline diameter  [m]
+    REAL(ReKi)  :: Zr      ! Ice ride-up height [m]
+    REAL(ReKi)  :: RHbr      ! Horizontal breaking force [N]
+    REAL(ReKi)  :: RVbr      ! Vertical breaking force [N]
+    REAL(ReKi)  :: Lbr      ! Ice sheet breaking length [m]
+    REAL(ReKi)  :: LovR      ! Ratio of ice breaking length over cone radius [-]
+    REAL(ReKi)  :: mu      ! Friction coefficient between structure and ice [-]
+    REAL(ReKi)  :: Wri      ! Initial ride-up ice weight  [kg]
+    REAL(ReKi)  :: WL      ! Broken ice piece weight [kg]
+    REAL(ReKi)  :: Cpa      ! ice crushing strength pressure-area relation constant [-]
+    REAL(ReKi)  :: dpa      ! ice crushing strength pressure-area relation order [-]
+    REAL(ReKi)  :: FdrN      ! Constant external driving force [N]
+    REAL(ReKi)  :: Mice      ! Ice floe mass [kg]
+    REAL(ReKi)  :: Fsp      ! Ice floe splitting force [N]
   END TYPE ID_ParameterType
 ! =======================
 ! =========  ID_InputType  =======
   TYPE, PUBLIC :: ID_InputType
-    REAL(ReKi)  :: q 
-    REAL(ReKi)  :: dqdt 
+    REAL(ReKi)  :: q      ! displacement of Mass 1 [m]
+    REAL(ReKi)  :: dqdt      ! velocity of Mass 1 [m/s]
   END TYPE ID_InputType
 ! =======================
 ! =========  ID_OutputType  =======
   TYPE, PUBLIC :: ID_OutputType
-    REAL(ReKi)  :: fice 
+    REAL(ReKi)  :: fice      ! Ice force [N]
   END TYPE ID_OutputType
 ! =======================
 CONTAINS
@@ -805,8 +808,12 @@ ENDIF
 ! 
   ErrStat = ErrID_None
   ErrMsg  = ""
-  IF ( ALLOCATED(InitOutputData%WriteOutputHdr) ) DEALLOCATE(InitOutputData%WriteOutputHdr)
-  IF ( ALLOCATED(InitOutputData%WriteOutputUnt) ) DEALLOCATE(InitOutputData%WriteOutputUnt)
+IF (ALLOCATED(InitOutputData%WriteOutputHdr)) THEN
+   DEALLOCATE(InitOutputData%WriteOutputHdr)
+ENDIF
+IF (ALLOCATED(InitOutputData%WriteOutputUnt)) THEN
+   DEALLOCATE(InitOutputData%WriteOutputUnt)
+ENDIF
  END SUBROUTINE ID_DestroyInitOutput
 
  SUBROUTINE ID_PackInitOutput( ReKiBuf, DbKiBuf, IntKiBuf, Indata, ErrStat, ErrMsg, SizeOnly )
@@ -1057,7 +1064,9 @@ ENDIF
 ! 
   ErrStat = ErrID_None
   ErrMsg  = ""
-  IF ( ALLOCATED(DiscStateData%IceTthNo) ) DEALLOCATE(DiscStateData%IceTthNo)
+IF (ALLOCATED(DiscStateData%IceTthNo)) THEN
+   DEALLOCATE(DiscStateData%IceTthNo)
+ENDIF
  END SUBROUTINE ID_DestroyDiscState
 
  SUBROUTINE ID_PackDiscState( ReKiBuf, DbKiBuf, IntKiBuf, Indata, ErrStat, ErrMsg, SizeOnly )
@@ -1404,6 +1413,7 @@ IF (ALLOCATED(OtherStateData%xdot)) THEN
 DO i1 = LBOUND(OtherStateData%xdot,1), UBOUND(OtherStateData%xdot,1)
   CALL ID_DestroyContState( OtherStateData%xdot(i1), ErrStat, ErrMsg )
 ENDDO
+   DEALLOCATE(OtherStateData%xdot)
 ENDIF
  END SUBROUTINE ID_DestroyOtherState
 
@@ -1670,10 +1680,18 @@ ENDIF
 ! 
   ErrStat = ErrID_None
   ErrMsg  = ""
-  IF ( ALLOCATED(ParamData%OutName) ) DEALLOCATE(ParamData%OutName)
-  IF ( ALLOCATED(ParamData%OutUnit) ) DEALLOCATE(ParamData%OutUnit)
-  IF ( ALLOCATED(ParamData%Y0) ) DEALLOCATE(ParamData%Y0)
-  IF ( ALLOCATED(ParamData%ContPrfl) ) DEALLOCATE(ParamData%ContPrfl)
+IF (ALLOCATED(ParamData%OutName)) THEN
+   DEALLOCATE(ParamData%OutName)
+ENDIF
+IF (ALLOCATED(ParamData%OutUnit)) THEN
+   DEALLOCATE(ParamData%OutUnit)
+ENDIF
+IF (ALLOCATED(ParamData%Y0)) THEN
+   DEALLOCATE(ParamData%Y0)
+ENDIF
+IF (ALLOCATED(ParamData%ContPrfl)) THEN
+   DEALLOCATE(ParamData%ContPrfl)
+ENDIF
  END SUBROUTINE ID_DestroyParam
 
  SUBROUTINE ID_PackParam( ReKiBuf, DbKiBuf, IntKiBuf, Indata, ErrStat, ErrMsg, SizeOnly )
@@ -2272,512 +2290,6 @@ ENDIF
   Int_Xferred  = Int_Xferred-1
  END SUBROUTINE ID_UnPackOutput
 
- SUBROUTINE ID_Pack( Re_RetAry, Db_RetAry, Int_RetAry, &
-                     InData, ParamData, ContStateData, DiscStateData, &
-                     ConstrStateData, OtherStateData, OutData, ErrStat, ErrMsg, &
-                     SizeOnly )
-  TYPE(ID_InputType),           INTENT(INOUT) :: InData
-  TYPE(ID_ParameterType),       INTENT(INOUT) :: ParamData
-  TYPE(ID_ContinuousStateType), INTENT(INOUT) :: ContStateData
-  TYPE(ID_DiscreteStateType),   INTENT(INOUT) :: DiscStateData
-  TYPE(ID_ConstraintStateType), INTENT(INOUT) :: ConstrStateData
-  TYPE(ID_OtherStateType),      INTENT(INOUT) :: OtherStateData
-  TYPE(ID_OutputType),          INTENT(INOUT) :: OutData
-  REAL(ReKi), ALLOCATABLE,      INTENT(  OUT) :: Re_RetAry(:)
-  REAL(DbKi), ALLOCATABLE,      INTENT(  OUT) :: Db_RetAry(:)
-  INTEGER(IntKi), ALLOCATABLE,  INTENT(  OUT) :: Int_RetAry(:)
-  INTEGER(IntKi),               INTENT(  OUT) :: ErrStat
-  CHARACTER(*),                 INTENT(  OUT) :: ErrMsg
-  LOGICAL, OPTIONAL,            INTENT(IN   ) :: SizeOnly
-    ! Local variables
-  REAL(ReKi), ALLOCATABLE                :: Re_Ary(:)
-  REAL(DbKi), ALLOCATABLE                :: Db_Ary(:)
-  INTEGER(IntKi), ALLOCATABLE            :: Int_Ary(:)
-  INTEGER(IntKi)                         :: Re_BufSz
-  INTEGER(IntKi)                         :: Re_Xferred
-  INTEGER(IntKi)                         :: Re_CurrSz
-  INTEGER(IntKi)                         :: Db_BufSz
-  INTEGER(IntKi)                         :: Db_Xferred
-  INTEGER(IntKi)                         :: Db_CurrSz
-  INTEGER(IntKi)                         :: Int_BufSz
-  INTEGER(IntKi)                         :: Int_Xferred
-  INTEGER(IntKi)                         :: Int_CurrSz
-  INTEGER(IntKi)                         :: ErrStat2
-  CHARACTER(Len(ErrMsg))                 :: ErrMsg2
-  LOGICAL                                :: OnlySize ! if present and true, do not pack, just allocate buffers
-    ! Executable statements
-  ErrStat = ErrID_None
-  ErrMsg  = ""
-  OnlySize = .FALSE.
-  IF ( PRESENT(SizeOnly) ) THEN
-    OnlySize = SizeOnly
-  ENDIF
-  Re_Xferred  = 1
-  Db_Xferred  = 1
-  Int_Xferred  = 1
-    ! Pack Input
-  IF ( ALLOCATED( Re_Ary ) )  DEALLOCATE(Re_Ary)
-  IF ( ALLOCATED( Db_Ary ) )  DEALLOCATE(Db_Ary)
-  IF ( ALLOCATED( Int_Ary ) )  DEALLOCATE(Int_Ary)
-  CALL ID_PackInput(Re_Ary,Db_Ary,Int_Ary,InData,ErrStat2,ErrMsg2,SizeOnly=.TRUE.)
-  IF ( ALLOCATED( Re_Ary ) ) THEN
-    Re_Xferred = Re_Xferred + SIZE( Re_Ary )
-    DEALLOCATE(Re_Ary)
-  ENDIF
-  IF ( ALLOCATED( Db_Ary ) ) THEN
-    Db_Xferred = Db_Xferred + SIZE( Db_Ary )
-    DEALLOCATE(Db_Ary)
-  ENDIF
-  IF ( ALLOCATED( Int_Ary ) ) THEN
-    Int_Xferred = Int_Xferred + SIZE( Int_Ary )
-    DEALLOCATE(Int_Ary)
-  ENDIF
-    ! Pack Param
-  IF ( ALLOCATED( Re_Ary ) )  DEALLOCATE(Re_Ary)
-  IF ( ALLOCATED( Db_Ary ) )  DEALLOCATE(Db_Ary)
-  IF ( ALLOCATED( Int_Ary ) )  DEALLOCATE(Int_Ary)
-  CALL ID_PackParam(Re_Ary,Db_Ary,Int_Ary,ParamData,ErrStat2,ErrMsg2,SizeOnly=.TRUE.)
-  IF ( ALLOCATED( Re_Ary ) ) THEN
-    Re_Xferred = Re_Xferred + SIZE( Re_Ary )
-    DEALLOCATE(Re_Ary)
-  ENDIF
-  IF ( ALLOCATED( Db_Ary ) ) THEN
-    Db_Xferred = Db_Xferred + SIZE( Db_Ary )
-    DEALLOCATE(Db_Ary)
-  ENDIF
-  IF ( ALLOCATED( Int_Ary ) ) THEN
-    Int_Xferred = Int_Xferred + SIZE( Int_Ary )
-    DEALLOCATE(Int_Ary)
-  ENDIF
-    ! Pack ContState
-  IF ( ALLOCATED( Re_Ary ) )  DEALLOCATE(Re_Ary)
-  IF ( ALLOCATED( Db_Ary ) )  DEALLOCATE(Db_Ary)
-  IF ( ALLOCATED( Int_Ary ) )  DEALLOCATE(Int_Ary)
-  CALL ID_PackContState(Re_Ary,Db_Ary,Int_Ary,ContStateData,ErrStat2,ErrMsg2,SizeOnly=.TRUE.)
-  IF ( ALLOCATED( Re_Ary ) ) THEN
-    Re_Xferred = Re_Xferred + SIZE( Re_Ary )
-    DEALLOCATE(Re_Ary)
-  ENDIF
-  IF ( ALLOCATED( Db_Ary ) ) THEN
-    Db_Xferred = Db_Xferred + SIZE( Db_Ary )
-    DEALLOCATE(Db_Ary)
-  ENDIF
-  IF ( ALLOCATED( Int_Ary ) ) THEN
-    Int_Xferred = Int_Xferred + SIZE( Int_Ary )
-    DEALLOCATE(Int_Ary)
-  ENDIF
-    ! Pack DiscState
-  IF ( ALLOCATED( Re_Ary ) )  DEALLOCATE(Re_Ary)
-  IF ( ALLOCATED( Db_Ary ) )  DEALLOCATE(Db_Ary)
-  IF ( ALLOCATED( Int_Ary ) )  DEALLOCATE(Int_Ary)
-  CALL ID_PackDiscState(Re_Ary,Db_Ary,Int_Ary,DiscStateData,ErrStat2,ErrMsg2,SizeOnly=.TRUE.)
-  IF ( ALLOCATED( Re_Ary ) ) THEN
-    Re_Xferred = Re_Xferred + SIZE( Re_Ary )
-    DEALLOCATE(Re_Ary)
-  ENDIF
-  IF ( ALLOCATED( Db_Ary ) ) THEN
-    Db_Xferred = Db_Xferred + SIZE( Db_Ary )
-    DEALLOCATE(Db_Ary)
-  ENDIF
-  IF ( ALLOCATED( Int_Ary ) ) THEN
-    Int_Xferred = Int_Xferred + SIZE( Int_Ary )
-    DEALLOCATE(Int_Ary)
-  ENDIF
-    ! Pack ConstrState
-  IF ( ALLOCATED( Re_Ary ) )  DEALLOCATE(Re_Ary)
-  IF ( ALLOCATED( Db_Ary ) )  DEALLOCATE(Db_Ary)
-  IF ( ALLOCATED( Int_Ary ) )  DEALLOCATE(Int_Ary)
-  CALL ID_PackConstrState(Re_Ary,Db_Ary,Int_Ary,ConstrStateData,ErrStat2,ErrMsg2,SizeOnly=.TRUE.)
-  IF ( ALLOCATED( Re_Ary ) ) THEN
-    Re_Xferred = Re_Xferred + SIZE( Re_Ary )
-    DEALLOCATE(Re_Ary)
-  ENDIF
-  IF ( ALLOCATED( Db_Ary ) ) THEN
-    Db_Xferred = Db_Xferred + SIZE( Db_Ary )
-    DEALLOCATE(Db_Ary)
-  ENDIF
-  IF ( ALLOCATED( Int_Ary ) ) THEN
-    Int_Xferred = Int_Xferred + SIZE( Int_Ary )
-    DEALLOCATE(Int_Ary)
-  ENDIF
-    ! Pack OtherState
-  IF ( ALLOCATED( Re_Ary ) )  DEALLOCATE(Re_Ary)
-  IF ( ALLOCATED( Db_Ary ) )  DEALLOCATE(Db_Ary)
-  IF ( ALLOCATED( Int_Ary ) )  DEALLOCATE(Int_Ary)
-  CALL ID_PackOtherState(Re_Ary,Db_Ary,Int_Ary,OtherStateData,ErrStat2,ErrMsg2,SizeOnly=.TRUE.)
-  IF ( ALLOCATED( Re_Ary ) ) THEN
-    Re_Xferred = Re_Xferred + SIZE( Re_Ary )
-    DEALLOCATE(Re_Ary)
-  ENDIF
-  IF ( ALLOCATED( Db_Ary ) ) THEN
-    Db_Xferred = Db_Xferred + SIZE( Db_Ary )
-    DEALLOCATE(Db_Ary)
-  ENDIF
-  IF ( ALLOCATED( Int_Ary ) ) THEN
-    Int_Xferred = Int_Xferred + SIZE( Int_Ary )
-    DEALLOCATE(Int_Ary)
-  ENDIF
-    ! Pack Output
-  IF ( ALLOCATED( Re_Ary ) )  DEALLOCATE(Re_Ary)
-  IF ( ALLOCATED( Db_Ary ) )  DEALLOCATE(Db_Ary)
-  IF ( ALLOCATED( Int_Ary ) )  DEALLOCATE(Int_Ary)
-  CALL ID_PackOutput(Re_Ary,Db_Ary,Int_Ary,OutData,ErrStat2,ErrMsg2,SizeOnly=.TRUE.)
-  IF ( ALLOCATED( Re_Ary ) ) THEN
-    Re_Xferred = Re_Xferred + SIZE( Re_Ary )
-    DEALLOCATE(Re_Ary)
-  ENDIF
-  IF ( ALLOCATED( Db_Ary ) ) THEN
-    Db_Xferred = Db_Xferred + SIZE( Db_Ary )
-    DEALLOCATE(Db_Ary)
-  ENDIF
-  IF ( ALLOCATED( Int_Ary ) ) THEN
-    Int_Xferred = Int_Xferred + SIZE( Int_Ary )
-    DEALLOCATE(Int_Ary)
-  ENDIF
-  Re_Xferred  = Re_Xferred - 1
-  Db_Xferred  = Db_Xferred - 1
-  Int_Xferred  = Int_Xferred - 1
-  IF ( ALLOCATED( Re_RetAry ) ) DEALLOCATE( Re_RetAry ) ;
-  IF ( Re_Xferred .GT. 0) ALLOCATE( Re_RetAry( Re_Xferred ) ) ;
-  IF ( ALLOCATED( Db_RetAry ) ) DEALLOCATE( Db_RetAry ) ;
-  IF ( Db_Xferred .GT. 0) ALLOCATE( Db_RetAry( Db_Xferred ) ) ;
-  IF ( ALLOCATED( Int_RetAry ) ) DEALLOCATE( Int_RetAry ) ;
-  IF ( Int_Xferred .GT. 0) ALLOCATE( Int_RetAry( Int_Xferred ) ) ;
-  Re_Xferred  = 1
-  Db_Xferred  = 1
-  Int_Xferred  = 1
-    ! Pack Input
-  IF ( ALLOCATED( Re_Ary ) )  DEALLOCATE(Re_Ary)
-  IF ( ALLOCATED( Db_Ary ) )  DEALLOCATE(Db_Ary)
-  IF ( ALLOCATED( Int_Ary ) )  DEALLOCATE(Int_Ary)
-  CALL ID_PackInput(Re_Ary,Db_Ary,Int_Ary,InData,ErrStat2,ErrMsg2)
-  IF ( ALLOCATED( Re_Ary ) ) THEN
-    IF ( .NOT. OnlySize ) Re_RetAry(Re_Xferred:Re_Xferred+SIZE(Re_Ary)-1)=Re_Ary
-    Re_Xferred = Re_Xferred + SIZE( Re_Ary )
-    DEALLOCATE(Re_Ary)
-  ENDIF
-  IF ( ALLOCATED( Db_Ary ) ) THEN
-    IF ( .NOT. OnlySize ) Db_RetAry(Db_Xferred:Db_Xferred+SIZE(Db_Ary)-1)=Db_Ary
-    Db_Xferred = Db_Xferred + SIZE( Db_Ary )
-    DEALLOCATE(Db_Ary)
-  ENDIF
-  IF ( ALLOCATED( Int_Ary ) ) THEN
-    IF ( .NOT. OnlySize ) Int_RetAry(Int_Xferred:Int_Xferred+SIZE(Int_Ary)-1)=Int_Ary
-    Int_Xferred = Int_Xferred + SIZE( Int_Ary )
-    DEALLOCATE(Int_Ary)
-  ENDIF
-    ! Pack Param
-  IF ( ALLOCATED( Re_Ary ) )  DEALLOCATE(Re_Ary)
-  IF ( ALLOCATED( Db_Ary ) )  DEALLOCATE(Db_Ary)
-  IF ( ALLOCATED( Int_Ary ) )  DEALLOCATE(Int_Ary)
-  CALL ID_PackParam(Re_Ary,Db_Ary,Int_Ary,ParamData,ErrStat2,ErrMsg2)
-  IF ( ALLOCATED( Re_Ary ) ) THEN
-    IF ( .NOT. OnlySize ) Re_RetAry(Re_Xferred:Re_Xferred+SIZE(Re_Ary)-1)=Re_Ary
-    Re_Xferred = Re_Xferred + SIZE( Re_Ary )
-    DEALLOCATE(Re_Ary)
-  ENDIF
-  IF ( ALLOCATED( Db_Ary ) ) THEN
-    IF ( .NOT. OnlySize ) Db_RetAry(Db_Xferred:Db_Xferred+SIZE(Db_Ary)-1)=Db_Ary
-    Db_Xferred = Db_Xferred + SIZE( Db_Ary )
-    DEALLOCATE(Db_Ary)
-  ENDIF
-  IF ( ALLOCATED( Int_Ary ) ) THEN
-    IF ( .NOT. OnlySize ) Int_RetAry(Int_Xferred:Int_Xferred+SIZE(Int_Ary)-1)=Int_Ary
-    Int_Xferred = Int_Xferred + SIZE( Int_Ary )
-    DEALLOCATE(Int_Ary)
-  ENDIF
-    ! Pack ContState
-  IF ( ALLOCATED( Re_Ary ) )  DEALLOCATE(Re_Ary)
-  IF ( ALLOCATED( Db_Ary ) )  DEALLOCATE(Db_Ary)
-  IF ( ALLOCATED( Int_Ary ) )  DEALLOCATE(Int_Ary)
-  CALL ID_PackContState(Re_Ary,Db_Ary,Int_Ary,ContStateData,ErrStat2,ErrMsg2)
-  IF ( ALLOCATED( Re_Ary ) ) THEN
-    IF ( .NOT. OnlySize ) Re_RetAry(Re_Xferred:Re_Xferred+SIZE(Re_Ary)-1)=Re_Ary
-    Re_Xferred = Re_Xferred + SIZE( Re_Ary )
-    DEALLOCATE(Re_Ary)
-  ENDIF
-  IF ( ALLOCATED( Db_Ary ) ) THEN
-    IF ( .NOT. OnlySize ) Db_RetAry(Db_Xferred:Db_Xferred+SIZE(Db_Ary)-1)=Db_Ary
-    Db_Xferred = Db_Xferred + SIZE( Db_Ary )
-    DEALLOCATE(Db_Ary)
-  ENDIF
-  IF ( ALLOCATED( Int_Ary ) ) THEN
-    IF ( .NOT. OnlySize ) Int_RetAry(Int_Xferred:Int_Xferred+SIZE(Int_Ary)-1)=Int_Ary
-    Int_Xferred = Int_Xferred + SIZE( Int_Ary )
-    DEALLOCATE(Int_Ary)
-  ENDIF
-    ! Pack DiscState
-  IF ( ALLOCATED( Re_Ary ) )  DEALLOCATE(Re_Ary)
-  IF ( ALLOCATED( Db_Ary ) )  DEALLOCATE(Db_Ary)
-  IF ( ALLOCATED( Int_Ary ) )  DEALLOCATE(Int_Ary)
-  CALL ID_PackDiscState(Re_Ary,Db_Ary,Int_Ary,DiscStateData,ErrStat2,ErrMsg2)
-  IF ( ALLOCATED( Re_Ary ) ) THEN
-    IF ( .NOT. OnlySize ) Re_RetAry(Re_Xferred:Re_Xferred+SIZE(Re_Ary)-1)=Re_Ary
-    Re_Xferred = Re_Xferred + SIZE( Re_Ary )
-    DEALLOCATE(Re_Ary)
-  ENDIF
-  IF ( ALLOCATED( Db_Ary ) ) THEN
-    IF ( .NOT. OnlySize ) Db_RetAry(Db_Xferred:Db_Xferred+SIZE(Db_Ary)-1)=Db_Ary
-    Db_Xferred = Db_Xferred + SIZE( Db_Ary )
-    DEALLOCATE(Db_Ary)
-  ENDIF
-  IF ( ALLOCATED( Int_Ary ) ) THEN
-    IF ( .NOT. OnlySize ) Int_RetAry(Int_Xferred:Int_Xferred+SIZE(Int_Ary)-1)=Int_Ary
-    Int_Xferred = Int_Xferred + SIZE( Int_Ary )
-    DEALLOCATE(Int_Ary)
-  ENDIF
-    ! Pack ConstrState
-  IF ( ALLOCATED( Re_Ary ) )  DEALLOCATE(Re_Ary)
-  IF ( ALLOCATED( Db_Ary ) )  DEALLOCATE(Db_Ary)
-  IF ( ALLOCATED( Int_Ary ) )  DEALLOCATE(Int_Ary)
-  CALL ID_PackConstrState(Re_Ary,Db_Ary,Int_Ary,ConstrStateData,ErrStat2,ErrMsg2)
-  IF ( ALLOCATED( Re_Ary ) ) THEN
-    IF ( .NOT. OnlySize ) Re_RetAry(Re_Xferred:Re_Xferred+SIZE(Re_Ary)-1)=Re_Ary
-    Re_Xferred = Re_Xferred + SIZE( Re_Ary )
-    DEALLOCATE(Re_Ary)
-  ENDIF
-  IF ( ALLOCATED( Db_Ary ) ) THEN
-    IF ( .NOT. OnlySize ) Db_RetAry(Db_Xferred:Db_Xferred+SIZE(Db_Ary)-1)=Db_Ary
-    Db_Xferred = Db_Xferred + SIZE( Db_Ary )
-    DEALLOCATE(Db_Ary)
-  ENDIF
-  IF ( ALLOCATED( Int_Ary ) ) THEN
-    IF ( .NOT. OnlySize ) Int_RetAry(Int_Xferred:Int_Xferred+SIZE(Int_Ary)-1)=Int_Ary
-    Int_Xferred = Int_Xferred + SIZE( Int_Ary )
-    DEALLOCATE(Int_Ary)
-  ENDIF
-    ! Pack OtherState
-  IF ( ALLOCATED( Re_Ary ) )  DEALLOCATE(Re_Ary)
-  IF ( ALLOCATED( Db_Ary ) )  DEALLOCATE(Db_Ary)
-  IF ( ALLOCATED( Int_Ary ) )  DEALLOCATE(Int_Ary)
-  CALL ID_PackOtherState(Re_Ary,Db_Ary,Int_Ary,OtherStateData,ErrStat2,ErrMsg2)
-  IF ( ALLOCATED( Re_Ary ) ) THEN
-    IF ( .NOT. OnlySize ) Re_RetAry(Re_Xferred:Re_Xferred+SIZE(Re_Ary)-1)=Re_Ary
-    Re_Xferred = Re_Xferred + SIZE( Re_Ary )
-    DEALLOCATE(Re_Ary)
-  ENDIF
-  IF ( ALLOCATED( Db_Ary ) ) THEN
-    IF ( .NOT. OnlySize ) Db_RetAry(Db_Xferred:Db_Xferred+SIZE(Db_Ary)-1)=Db_Ary
-    Db_Xferred = Db_Xferred + SIZE( Db_Ary )
-    DEALLOCATE(Db_Ary)
-  ENDIF
-  IF ( ALLOCATED( Int_Ary ) ) THEN
-    IF ( .NOT. OnlySize ) Int_RetAry(Int_Xferred:Int_Xferred+SIZE(Int_Ary)-1)=Int_Ary
-    Int_Xferred = Int_Xferred + SIZE( Int_Ary )
-    DEALLOCATE(Int_Ary)
-  ENDIF
-    ! Pack Output
-  IF ( ALLOCATED( Re_Ary ) )  DEALLOCATE(Re_Ary)
-  IF ( ALLOCATED( Db_Ary ) )  DEALLOCATE(Db_Ary)
-  IF ( ALLOCATED( Int_Ary ) )  DEALLOCATE(Int_Ary)
-  CALL ID_PackOutput(Re_Ary,Db_Ary,Int_Ary,OutData,ErrStat2,ErrMsg2)
-  IF ( ALLOCATED( Re_Ary ) ) THEN
-    IF ( .NOT. OnlySize ) Re_RetAry(Re_Xferred:Re_Xferred+SIZE(Re_Ary)-1)=Re_Ary
-    Re_Xferred = Re_Xferred + SIZE( Re_Ary )
-    DEALLOCATE(Re_Ary)
-  ENDIF
-  IF ( ALLOCATED( Db_Ary ) ) THEN
-    IF ( .NOT. OnlySize ) Db_RetAry(Db_Xferred:Db_Xferred+SIZE(Db_Ary)-1)=Db_Ary
-    Db_Xferred = Db_Xferred + SIZE( Db_Ary )
-    DEALLOCATE(Db_Ary)
-  ENDIF
-  IF ( ALLOCATED( Int_Ary ) ) THEN
-    IF ( .NOT. OnlySize ) Int_RetAry(Int_Xferred:Int_Xferred+SIZE(Int_Ary)-1)=Int_Ary
-    Int_Xferred = Int_Xferred + SIZE( Int_Ary )
-    DEALLOCATE(Int_Ary)
-  ENDIF
-  Re_Xferred   = Re_Xferred - 1
-  Db_Xferred   = Db_Xferred - 1
-  Int_Xferred  = Int_Xferred - 1
- END SUBROUTINE ID_Pack
-
- SUBROUTINE ID_UnPack( Re_RetAry, Db_RetAry, Int_RetAry, &
-                     InData, ParamData, ContStateData, DiscStateData, &
-                     ConstrStateData, OtherStateData, OutData, ErrStat, ErrMsg )
-  TYPE(ID_InputType),           INTENT(INOUT) :: InData
-  TYPE(ID_ParameterType),       INTENT(INOUT) :: ParamData
-  TYPE(ID_ContinuousStateType), INTENT(INOUT) :: ContStateData
-  TYPE(ID_DiscreteStateType),   INTENT(INOUT) :: DiscStateData
-  TYPE(ID_ConstraintStateType), INTENT(INOUT) :: ConstrStateData
-  TYPE(ID_OtherStateType),      INTENT(INOUT) :: OtherStateData
-  TYPE(ID_OutputType),          INTENT(INOUT) :: OutData
-  REAL(ReKi), ALLOCATABLE,      INTENT(IN   ) :: Re_RetAry(:)
-  REAL(DbKi), ALLOCATABLE,      INTENT(IN   ) :: Db_RetAry(:)
-  INTEGER(IntKi), ALLOCATABLE,   INTENT(IN   ) :: Int_RetAry(:)
-  INTEGER(IntKi),  INTENT(  OUT) :: ErrStat
-  CHARACTER(*),    INTENT(  OUT) :: ErrMsg
-    ! Local variables
-  REAL(ReKi), ALLOCATABLE                :: Re_Ary(:)
-  REAL(DbKi), ALLOCATABLE                :: Db_Ary(:)
-  INTEGER(IntKi), ALLOCATABLE            :: Int_Ary(:)
-  INTEGER(IntKi)                         :: Re_BufSz
-  INTEGER(IntKi)                         :: Re_Xferred
-  INTEGER(IntKi)                         :: Re_CurrSz
-  INTEGER(IntKi)                         :: Db_BufSz
-  INTEGER(IntKi)                         :: Db_Xferred
-  INTEGER(IntKi)                         :: Db_CurrSz
-  INTEGER(IntKi)                         :: Int_BufSz
-  INTEGER(IntKi)                         :: Int_Xferred
-  INTEGER(IntKi)                         :: Int_CurrSz
-  INTEGER(IntKi)                         :: ErrStat2
-  CHARACTER(Len(ErrMsg))                 :: ErrMsg2
-  ErrStat = ErrID_None
-  ErrMsg  = ""
-  Re_Xferred  = 1
-  Db_Xferred  = 1
-  Int_Xferred  = 1
-    ! UnPack Input
-  IF ( ALLOCATED( Re_Ary ) )  DEALLOCATE(Re_Ary)
-  IF ( ALLOCATED( Db_Ary ) )  DEALLOCATE(Db_Ary)
-  IF ( ALLOCATED( Int_Ary ) )  DEALLOCATE(Int_Ary)
-  CALL ID_PackInput(Re_Ary,Db_Ary,Int_Ary,InData,ErrStat2,ErrMsg2,SizeOnly=.TRUE.)
-  IF ( ALLOCATED( Re_Ary ) ) THEN
-    Re_Ary = Re_RetAry(Re_Xferred:Re_Xferred+SIZE(Re_Ary)-1)
-    Re_Xferred = Re_Xferred + SIZE( Re_Ary )
-  ENDIF
-  IF ( ALLOCATED( Db_Ary ) ) THEN
-    DB_Ary = Db_RetAry(Db_Xferred:Db_Xferred+SIZE(Db_Ary)-1)
-    Db_Xferred = Db_Xferred + SIZE( Db_Ary )
-  ENDIF
-  IF ( ALLOCATED( Int_Ary ) ) THEN
-    Int_Ary = Int_RetAry(Int_Xferred:Int_Xferred+SIZE(Int_Ary)-1)
-    Int_Xferred = Int_Xferred + SIZE( Int_Ary )
-  ENDIF
-  CALL ID_UnPackInput(Re_Ary,Db_Ary,Int_Ary,InData,ErrStat2,ErrMsg2)
-  IF ( ALLOCATED( Re_Ary ) )  DEALLOCATE(Re_Ary)
-  IF ( ALLOCATED( Db_Ary ) )  DEALLOCATE(Db_Ary)
-  IF ( ALLOCATED( Int_Ary ) )  DEALLOCATE(Int_Ary)
-    ! UnPack Param
-  IF ( ALLOCATED( Re_Ary ) )  DEALLOCATE(Re_Ary)
-  IF ( ALLOCATED( Db_Ary ) )  DEALLOCATE(Db_Ary)
-  IF ( ALLOCATED( Int_Ary ) )  DEALLOCATE(Int_Ary)
-  CALL ID_PackParam(Re_Ary,Db_Ary,Int_Ary,ParamData,ErrStat2,ErrMsg2,SizeOnly=.TRUE.)
-  IF ( ALLOCATED( Re_Ary ) ) THEN
-    Re_Ary = Re_RetAry(Re_Xferred:Re_Xferred+SIZE(Re_Ary)-1)
-    Re_Xferred = Re_Xferred + SIZE( Re_Ary )
-  ENDIF
-  IF ( ALLOCATED( Db_Ary ) ) THEN
-    DB_Ary = Db_RetAry(Db_Xferred:Db_Xferred+SIZE(Db_Ary)-1)
-    Db_Xferred = Db_Xferred + SIZE( Db_Ary )
-  ENDIF
-  IF ( ALLOCATED( Int_Ary ) ) THEN
-    Int_Ary = Int_RetAry(Int_Xferred:Int_Xferred+SIZE(Int_Ary)-1)
-    Int_Xferred = Int_Xferred + SIZE( Int_Ary )
-  ENDIF
-  CALL ID_UnPackParam(Re_Ary,Db_Ary,Int_Ary,ParamData,ErrStat2,ErrMsg2)
-  IF ( ALLOCATED( Re_Ary ) )  DEALLOCATE(Re_Ary)
-  IF ( ALLOCATED( Db_Ary ) )  DEALLOCATE(Db_Ary)
-  IF ( ALLOCATED( Int_Ary ) )  DEALLOCATE(Int_Ary)
-    ! UnPack ContState
-  IF ( ALLOCATED( Re_Ary ) )  DEALLOCATE(Re_Ary)
-  IF ( ALLOCATED( Db_Ary ) )  DEALLOCATE(Db_Ary)
-  IF ( ALLOCATED( Int_Ary ) )  DEALLOCATE(Int_Ary)
-  CALL ID_PackContState(Re_Ary,Db_Ary,Int_Ary,ContStateData,ErrStat2,ErrMsg2,SizeOnly=.TRUE.)
-  IF ( ALLOCATED( Re_Ary ) ) THEN
-    Re_Ary = Re_RetAry(Re_Xferred:Re_Xferred+SIZE(Re_Ary)-1)
-    Re_Xferred = Re_Xferred + SIZE( Re_Ary )
-  ENDIF
-  IF ( ALLOCATED( Db_Ary ) ) THEN
-    DB_Ary = Db_RetAry(Db_Xferred:Db_Xferred+SIZE(Db_Ary)-1)
-    Db_Xferred = Db_Xferred + SIZE( Db_Ary )
-  ENDIF
-  IF ( ALLOCATED( Int_Ary ) ) THEN
-    Int_Ary = Int_RetAry(Int_Xferred:Int_Xferred+SIZE(Int_Ary)-1)
-    Int_Xferred = Int_Xferred + SIZE( Int_Ary )
-  ENDIF
-  CALL ID_UnPackContState(Re_Ary,Db_Ary,Int_Ary,ContStateData,ErrStat2,ErrMsg2)
-  IF ( ALLOCATED( Re_Ary ) )  DEALLOCATE(Re_Ary)
-  IF ( ALLOCATED( Db_Ary ) )  DEALLOCATE(Db_Ary)
-  IF ( ALLOCATED( Int_Ary ) )  DEALLOCATE(Int_Ary)
-    ! UnPack DiscState
-  IF ( ALLOCATED( Re_Ary ) )  DEALLOCATE(Re_Ary)
-  IF ( ALLOCATED( Db_Ary ) )  DEALLOCATE(Db_Ary)
-  IF ( ALLOCATED( Int_Ary ) )  DEALLOCATE(Int_Ary)
-  CALL ID_PackDiscState(Re_Ary,Db_Ary,Int_Ary,DiscStateData,ErrStat2,ErrMsg2,SizeOnly=.TRUE.)
-  IF ( ALLOCATED( Re_Ary ) ) THEN
-    Re_Ary = Re_RetAry(Re_Xferred:Re_Xferred+SIZE(Re_Ary)-1)
-    Re_Xferred = Re_Xferred + SIZE( Re_Ary )
-  ENDIF
-  IF ( ALLOCATED( Db_Ary ) ) THEN
-    DB_Ary = Db_RetAry(Db_Xferred:Db_Xferred+SIZE(Db_Ary)-1)
-    Db_Xferred = Db_Xferred + SIZE( Db_Ary )
-  ENDIF
-  IF ( ALLOCATED( Int_Ary ) ) THEN
-    Int_Ary = Int_RetAry(Int_Xferred:Int_Xferred+SIZE(Int_Ary)-1)
-    Int_Xferred = Int_Xferred + SIZE( Int_Ary )
-  ENDIF
-  CALL ID_UnPackDiscState(Re_Ary,Db_Ary,Int_Ary,DiscStateData,ErrStat2,ErrMsg2)
-  IF ( ALLOCATED( Re_Ary ) )  DEALLOCATE(Re_Ary)
-  IF ( ALLOCATED( Db_Ary ) )  DEALLOCATE(Db_Ary)
-  IF ( ALLOCATED( Int_Ary ) )  DEALLOCATE(Int_Ary)
-    ! UnPack ConstrState
-  IF ( ALLOCATED( Re_Ary ) )  DEALLOCATE(Re_Ary)
-  IF ( ALLOCATED( Db_Ary ) )  DEALLOCATE(Db_Ary)
-  IF ( ALLOCATED( Int_Ary ) )  DEALLOCATE(Int_Ary)
-  CALL ID_PackConstrState(Re_Ary,Db_Ary,Int_Ary,ConstrStateData,ErrStat2,ErrMsg2,SizeOnly=.TRUE.)
-  IF ( ALLOCATED( Re_Ary ) ) THEN
-    Re_Ary = Re_RetAry(Re_Xferred:Re_Xferred+SIZE(Re_Ary)-1)
-    Re_Xferred = Re_Xferred + SIZE( Re_Ary )
-  ENDIF
-  IF ( ALLOCATED( Db_Ary ) ) THEN
-    DB_Ary = Db_RetAry(Db_Xferred:Db_Xferred+SIZE(Db_Ary)-1)
-    Db_Xferred = Db_Xferred + SIZE( Db_Ary )
-  ENDIF
-  IF ( ALLOCATED( Int_Ary ) ) THEN
-    Int_Ary = Int_RetAry(Int_Xferred:Int_Xferred+SIZE(Int_Ary)-1)
-    Int_Xferred = Int_Xferred + SIZE( Int_Ary )
-  ENDIF
-  CALL ID_UnPackConstrState(Re_Ary,Db_Ary,Int_Ary,ConstrStateData,ErrStat2,ErrMsg2)
-  IF ( ALLOCATED( Re_Ary ) )  DEALLOCATE(Re_Ary)
-  IF ( ALLOCATED( Db_Ary ) )  DEALLOCATE(Db_Ary)
-  IF ( ALLOCATED( Int_Ary ) )  DEALLOCATE(Int_Ary)
-    ! UnPack OtherState
-  IF ( ALLOCATED( Re_Ary ) )  DEALLOCATE(Re_Ary)
-  IF ( ALLOCATED( Db_Ary ) )  DEALLOCATE(Db_Ary)
-  IF ( ALLOCATED( Int_Ary ) )  DEALLOCATE(Int_Ary)
-  CALL ID_PackOtherState(Re_Ary,Db_Ary,Int_Ary,OtherStateData,ErrStat2,ErrMsg2,SizeOnly=.TRUE.)
-  IF ( ALLOCATED( Re_Ary ) ) THEN
-    Re_Ary = Re_RetAry(Re_Xferred:Re_Xferred+SIZE(Re_Ary)-1)
-    Re_Xferred = Re_Xferred + SIZE( Re_Ary )
-  ENDIF
-  IF ( ALLOCATED( Db_Ary ) ) THEN
-    DB_Ary = Db_RetAry(Db_Xferred:Db_Xferred+SIZE(Db_Ary)-1)
-    Db_Xferred = Db_Xferred + SIZE( Db_Ary )
-  ENDIF
-  IF ( ALLOCATED( Int_Ary ) ) THEN
-    Int_Ary = Int_RetAry(Int_Xferred:Int_Xferred+SIZE(Int_Ary)-1)
-    Int_Xferred = Int_Xferred + SIZE( Int_Ary )
-  ENDIF
-  CALL ID_UnPackOtherState(Re_Ary,Db_Ary,Int_Ary,OtherStateData,ErrStat2,ErrMsg2)
-  IF ( ALLOCATED( Re_Ary ) )  DEALLOCATE(Re_Ary)
-  IF ( ALLOCATED( Db_Ary ) )  DEALLOCATE(Db_Ary)
-  IF ( ALLOCATED( Int_Ary ) )  DEALLOCATE(Int_Ary)
-    ! UnPack Output
-  IF ( ALLOCATED( Re_Ary ) )  DEALLOCATE(Re_Ary)
-  IF ( ALLOCATED( Db_Ary ) )  DEALLOCATE(Db_Ary)
-  IF ( ALLOCATED( Int_Ary ) )  DEALLOCATE(Int_Ary)
-  CALL ID_PackOutput(Re_Ary,Db_Ary,Int_Ary,OutData,ErrStat2,ErrMsg2,SizeOnly=.TRUE.)
-  IF ( ALLOCATED( Re_Ary ) ) THEN
-    Re_Ary = Re_RetAry(Re_Xferred:Re_Xferred+SIZE(Re_Ary)-1)
-    Re_Xferred = Re_Xferred + SIZE( Re_Ary )
-  ENDIF
-  IF ( ALLOCATED( Db_Ary ) ) THEN
-    DB_Ary = Db_RetAry(Db_Xferred:Db_Xferred+SIZE(Db_Ary)-1)
-    Db_Xferred = Db_Xferred + SIZE( Db_Ary )
-  ENDIF
-  IF ( ALLOCATED( Int_Ary ) ) THEN
-    Int_Ary = Int_RetAry(Int_Xferred:Int_Xferred+SIZE(Int_Ary)-1)
-    Int_Xferred = Int_Xferred + SIZE( Int_Ary )
-  ENDIF
-  CALL ID_UnPackOutput(Re_Ary,Db_Ary,Int_Ary,OutData,ErrStat2,ErrMsg2)
-  IF ( ALLOCATED( Re_Ary ) )  DEALLOCATE(Re_Ary)
-  IF ( ALLOCATED( Db_Ary ) )  DEALLOCATE(Db_Ary)
-  IF ( ALLOCATED( Int_Ary ) )  DEALLOCATE(Int_Ary)
-  Re_Xferred   = Re_Xferred-1
-  Db_Xferred   = Db_Xferred-1
-  Int_Xferred  = Int_Xferred-1
- END SUBROUTINE ID_UnPack
-
 
  SUBROUTINE ID_Input_ExtrapInterp(u, tin, u_out, tin_out, ErrStat, ErrMsg )
 !
@@ -2795,7 +2307,7 @@ ENDIF
 !
 !..................................................................................................................................
 
- TYPE(ID_inputtype), INTENT(IN   )  :: u(:)      ! Inputs at t1 > t2 > t3
+ TYPE(ID_inputtype), INTENT(INOUT)  :: u(:)      ! Inputs at t1 > t2 > t3
  REAL(DbKi),         INTENT(IN   )  :: tin(:)      ! Times associated with the inputs
  TYPE(ID_inputtype), INTENT(INOUT)  :: u_out     ! Inputs at tin_out
  REAL(DbKi),         INTENT(IN   )  :: tin_out     ! time to be extrap/interp'd to
