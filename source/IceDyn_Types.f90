@@ -111,7 +111,7 @@ IMPLICIT NONE
     INTEGER(IntKi)  :: n      ! tracks time step for which OtherState was updated [-]
     INTEGER(IntKi)  :: IceTthNo2      ! Ice tooth number of the current ice tooth, for model 2 [-]
     INTEGER(IntKi) , DIMENSION(:), ALLOCATABLE  :: Nc      ! Number of the current ice tooths number (time series) [-]
-    INTEGER(IntKi) , DIMENSION(:), ALLOCATABLE  :: Psum      ! The sum of pitches of all broken ice teeth (time series) [m]
+    REAL(ReKi) , DIMENSION(:), ALLOCATABLE  :: Psum      ! The sum of pitches of all broken ice teeth (time series) [m]
   END TYPE ID_OtherStateType
 ! =======================
 ! =========  ID_ParameterType  =======
@@ -1246,7 +1246,7 @@ ENDDO
   Int_BufSz  = Int_BufSz  + 1  ! n
   Int_BufSz  = Int_BufSz  + 1  ! IceTthNo2
   Int_BufSz   = Int_BufSz   + SIZE( InData%Nc )  ! Nc 
-  Int_BufSz   = Int_BufSz   + SIZE( InData%Psum )  ! Psum 
+  Re_BufSz    = Re_BufSz    + SIZE( InData%Psum )  ! Psum 
   IF ( Re_BufSz  .GT. 0 ) ALLOCATE( ReKiBuf(  Re_BufSz  ) )
   IF ( Db_BufSz  .GT. 0 ) ALLOCATE( DbKiBuf(  Db_BufSz  ) )
   IF ( Int_BufSz .GT. 0 ) ALLOCATE( IntKiBuf( Int_BufSz ) )
@@ -1277,8 +1277,8 @@ ENDDO
     Int_Xferred   = Int_Xferred   + SIZE(InData%Nc)
   ENDIF
   IF ( ALLOCATED(InData%Psum) ) THEN
-    IF ( .NOT. OnlySize ) IntKiBuf ( Int_Xferred:Int_Xferred+(SIZE(InData%Psum))-1 ) = PACK(InData%Psum ,.TRUE.)
-    Int_Xferred   = Int_Xferred   + SIZE(InData%Psum)
+    IF ( .NOT. OnlySize ) ReKiBuf ( Re_Xferred:Re_Xferred+(SIZE(InData%Psum))-1 ) =  PACK(InData%Psum ,.TRUE.)
+    Re_Xferred   = Re_Xferred   + SIZE(InData%Psum)
   ENDIF
  END SUBROUTINE ID_PackOtherState
 
@@ -1347,9 +1347,9 @@ ENDDO
   ENDIF
   IF ( ALLOCATED(OutData%Psum) ) THEN
   ALLOCATE(mask1(SIZE(OutData%Psum,1))); mask1 = .TRUE.
-    OutData%Psum = UNPACK(IntKiBuf( Int_Xferred:Re_Xferred+(SIZE(OutData%Psum))-1 ),mask1,OutData%Psum)
+    OutData%Psum = UNPACK(ReKiBuf( Re_Xferred:Re_Xferred+(SIZE(OutData%Psum))-1 ),mask1,OutData%Psum)
   DEALLOCATE(mask1)
-    Int_Xferred   = Int_Xferred   + SIZE(OutData%Psum)
+    Re_Xferred   = Re_Xferred   + SIZE(OutData%Psum)
   ENDIF
   Re_Xferred   = Re_Xferred-1
   Db_Xferred   = Db_Xferred-1
