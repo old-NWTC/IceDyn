@@ -77,6 +77,7 @@ IMPLICIT NONE
     CHARACTER(1024)  :: RootName      ! Root name of the output file [-]
     REAL(ReKi)  :: MSL2SWL      ! Offset between still-water level and mean sea level [m]
     REAL(ReKi)  :: WtrDens      ! Density of water [kg/m^3]
+    REAL(ReKi)  :: gravity      ! Gravitational acceleration [m/s^2]
     INTEGER(IntKi)  :: LegNum      ! Which number of legs on the turbine this is being initialized for [m]
     REAL(DbKi)  :: TMax      ! Total simulation time [s]
   END TYPE ID_InitInputType
@@ -155,15 +156,13 @@ IMPLICIT NONE
 ! =======================
 ! =========  ID_InputType  =======
   TYPE, PUBLIC :: ID_InputType
-    REAL(ReKi)  :: q      ! displacement of Mass 1 [m]
-    REAL(ReKi)  :: dqdt      ! velocity of Mass 1 [m/s]
-    TYPE(MeshType)  :: PointMesh      ! contains displacement, velocity, acceleration [-]
+    TYPE(MeshType)  :: PointMesh      ! contains displacement and velocity of structure [-]
   END TYPE ID_InputType
 ! =======================
 ! =========  ID_OutputType  =======
   TYPE, PUBLIC :: ID_OutputType
-    REAL(ReKi)  :: fice      ! Ice force [N]
-    TYPE(MeshType)  :: PointMesh      ! contains force [-]
+    TYPE(MeshType)  :: PointMesh      ! contains Ice force [N]
+    REAL(ReKi) , DIMENSION(:), ALLOCATABLE  :: WriteOutput      ! Data to be written to an output file: see WriteOutputHdr for names of each variable [see WriteOutputUnt]
   END TYPE ID_OutputType
 ! =======================
 CONTAINS
@@ -490,6 +489,7 @@ CONTAINS
    DstInitInputData%RootName = SrcInitInputData%RootName
    DstInitInputData%MSL2SWL = SrcInitInputData%MSL2SWL
    DstInitInputData%WtrDens = SrcInitInputData%WtrDens
+   DstInitInputData%gravity = SrcInitInputData%gravity
    DstInitInputData%LegNum = SrcInitInputData%LegNum
    DstInitInputData%TMax = SrcInitInputData%TMax
  END SUBROUTINE ID_CopyInitInput
@@ -540,6 +540,7 @@ CONTAINS
   Int_BufSz  = 0
   Re_BufSz   = Re_BufSz   + 1  ! MSL2SWL
   Re_BufSz   = Re_BufSz   + 1  ! WtrDens
+  Re_BufSz   = Re_BufSz   + 1  ! gravity
   Int_BufSz  = Int_BufSz  + 1  ! LegNum
   Db_BufSz   = Db_BufSz   + 1  ! TMax
   IF ( Re_BufSz  .GT. 0 ) ALLOCATE( ReKiBuf(  Re_BufSz  ) )
@@ -548,6 +549,8 @@ CONTAINS
   IF ( .NOT. OnlySize ) ReKiBuf ( Re_Xferred:Re_Xferred+(1)-1 ) =  (InData%MSL2SWL )
   Re_Xferred   = Re_Xferred   + 1
   IF ( .NOT. OnlySize ) ReKiBuf ( Re_Xferred:Re_Xferred+(1)-1 ) =  (InData%WtrDens )
+  Re_Xferred   = Re_Xferred   + 1
+  IF ( .NOT. OnlySize ) ReKiBuf ( Re_Xferred:Re_Xferred+(1)-1 ) =  (InData%gravity )
   Re_Xferred   = Re_Xferred   + 1
   IF ( .NOT. OnlySize ) IntKiBuf ( Int_Xferred:Int_Xferred+(1)-1 ) = (InData%LegNum )
   Int_Xferred   = Int_Xferred   + 1
@@ -591,6 +594,8 @@ CONTAINS
   OutData%MSL2SWL = ReKiBuf ( Re_Xferred )
   Re_Xferred   = Re_Xferred   + 1
   OutData%WtrDens = ReKiBuf ( Re_Xferred )
+  Re_Xferred   = Re_Xferred   + 1
+  OutData%gravity = ReKiBuf ( Re_Xferred )
   Re_Xferred   = Re_Xferred   + 1
   OutData%LegNum = IntKiBuf ( Int_Xferred )
   Int_Xferred   = Int_Xferred   + 1
@@ -1822,8 +1827,6 @@ ENDIF
 ! 
    ErrStat = ErrID_None
    ErrMsg  = ""
-   DstInputData%q = SrcInputData%q
-   DstInputData%dqdt = SrcInputData%dqdt
      CALL MeshCopy( SrcInputData%PointMesh, DstInputData%PointMesh, CtrlCode, ErrStat, ErrMsg )
  END SUBROUTINE ID_CopyInput
 
@@ -1875,8 +1878,6 @@ ENDIF
   Re_BufSz  = 0
   Db_BufSz  = 0
   Int_BufSz  = 0
-  Re_BufSz   = Re_BufSz   + 1  ! q
-  Re_BufSz   = Re_BufSz   + 1  ! dqdt
  ! Allocate mesh buffers, if any (we'll also get sizes from these) 
   CALL MeshPack( InData%PointMesh, Re_PointMesh_Buf, Db_PointMesh_Buf, Int_PointMesh_Buf, ErrStat, ErrMsg, .TRUE. ) ! PointMesh 
   IF(ALLOCATED(Re_PointMesh_Buf)) Re_BufSz  = Re_BufSz  + SIZE( Re_PointMesh_Buf  ) ! PointMesh
@@ -1888,10 +1889,6 @@ ENDIF
   IF ( Re_BufSz  .GT. 0 ) ALLOCATE( ReKiBuf(  Re_BufSz  ) )
   IF ( Db_BufSz  .GT. 0 ) ALLOCATE( DbKiBuf(  Db_BufSz  ) )
   IF ( Int_BufSz .GT. 0 ) ALLOCATE( IntKiBuf( Int_BufSz ) )
-  IF ( .NOT. OnlySize ) ReKiBuf ( Re_Xferred:Re_Xferred+(1)-1 ) =  (InData%q )
-  Re_Xferred   = Re_Xferred   + 1
-  IF ( .NOT. OnlySize ) ReKiBuf ( Re_Xferred:Re_Xferred+(1)-1 ) =  (InData%dqdt )
-  Re_Xferred   = Re_Xferred   + 1
   CALL MeshPack( InData%PointMesh, Re_PointMesh_Buf, Db_PointMesh_Buf, Int_PointMesh_Buf, ErrStat, ErrMsg, OnlySize ) ! PointMesh 
   IF(ALLOCATED(Re_PointMesh_Buf)) THEN
     IF ( .NOT. OnlySize ) ReKiBuf( Re_Xferred:Re_Xferred+SIZE(Re_PointMesh_Buf)-1 ) = Re_PointMesh_Buf
@@ -1946,10 +1943,6 @@ ENDIF
   Re_BufSz  = 0
   Db_BufSz  = 0
   Int_BufSz  = 0
-  OutData%q = ReKiBuf ( Re_Xferred )
-  Re_Xferred   = Re_Xferred   + 1
-  OutData%dqdt = ReKiBuf ( Re_Xferred )
-  Re_Xferred   = Re_Xferred   + 1
  ! first call MeshPack to get correctly sized buffers for unpacking
   CALL MeshPack( OutData%PointMesh, Re_PointMesh_Buf, Db_PointMesh_Buf, Int_PointMesh_Buf, ErrStat, ErrMsg , .TRUE. ) ! PointMesh 
   IF(ALLOCATED(Re_PointMesh_Buf)) THEN
@@ -1986,8 +1979,20 @@ ENDIF
 ! 
    ErrStat = ErrID_None
    ErrMsg  = ""
-   DstOutputData%fice = SrcOutputData%fice
      CALL MeshCopy( SrcOutputData%PointMesh, DstOutputData%PointMesh, CtrlCode, ErrStat, ErrMsg )
+IF (ALLOCATED(SrcOutputData%WriteOutput)) THEN
+   i1_l = LBOUND(SrcOutputData%WriteOutput,1)
+   i1_u = UBOUND(SrcOutputData%WriteOutput,1)
+   IF (.NOT. ALLOCATED(DstOutputData%WriteOutput)) THEN 
+      ALLOCATE(DstOutputData%WriteOutput(i1_l:i1_u),STAT=ErrStat)
+      IF (ErrStat /= 0) THEN 
+         ErrStat = ErrID_Fatal 
+         ErrMsg = 'ID_CopyOutput: Error allocating DstOutputData%WriteOutput.'
+         RETURN
+      END IF
+   END IF
+   DstOutputData%WriteOutput = SrcOutputData%WriteOutput
+ENDIF
  END SUBROUTINE ID_CopyOutput
 
  SUBROUTINE ID_DestroyOutput( OutputData, ErrStat, ErrMsg )
@@ -1999,6 +2004,9 @@ ENDIF
   ErrStat = ErrID_None
   ErrMsg  = ""
   CALL MeshDestroy( OutputData%PointMesh, ErrStat, ErrMsg )
+IF (ALLOCATED(OutputData%WriteOutput)) THEN
+   DEALLOCATE(OutputData%WriteOutput)
+ENDIF
  END SUBROUTINE ID_DestroyOutput
 
  SUBROUTINE ID_PackOutput( ReKiBuf, DbKiBuf, IntKiBuf, Indata, ErrStat, ErrMsg, SizeOnly )
@@ -2038,7 +2046,6 @@ ENDIF
   Re_BufSz  = 0
   Db_BufSz  = 0
   Int_BufSz  = 0
-  Re_BufSz   = Re_BufSz   + 1  ! fice
  ! Allocate mesh buffers, if any (we'll also get sizes from these) 
   CALL MeshPack( InData%PointMesh, Re_PointMesh_Buf, Db_PointMesh_Buf, Int_PointMesh_Buf, ErrStat, ErrMsg, .TRUE. ) ! PointMesh 
   IF(ALLOCATED(Re_PointMesh_Buf)) Re_BufSz  = Re_BufSz  + SIZE( Re_PointMesh_Buf  ) ! PointMesh
@@ -2047,11 +2054,10 @@ ENDIF
   IF(ALLOCATED(Re_PointMesh_Buf))  DEALLOCATE(Re_PointMesh_Buf)
   IF(ALLOCATED(Db_PointMesh_Buf))  DEALLOCATE(Db_PointMesh_Buf)
   IF(ALLOCATED(Int_PointMesh_Buf)) DEALLOCATE(Int_PointMesh_Buf)
+  Re_BufSz    = Re_BufSz    + SIZE( InData%WriteOutput )  ! WriteOutput 
   IF ( Re_BufSz  .GT. 0 ) ALLOCATE( ReKiBuf(  Re_BufSz  ) )
   IF ( Db_BufSz  .GT. 0 ) ALLOCATE( DbKiBuf(  Db_BufSz  ) )
   IF ( Int_BufSz .GT. 0 ) ALLOCATE( IntKiBuf( Int_BufSz ) )
-  IF ( .NOT. OnlySize ) ReKiBuf ( Re_Xferred:Re_Xferred+(1)-1 ) =  (InData%fice )
-  Re_Xferred   = Re_Xferred   + 1
   CALL MeshPack( InData%PointMesh, Re_PointMesh_Buf, Db_PointMesh_Buf, Int_PointMesh_Buf, ErrStat, ErrMsg, OnlySize ) ! PointMesh 
   IF(ALLOCATED(Re_PointMesh_Buf)) THEN
     IF ( .NOT. OnlySize ) ReKiBuf( Re_Xferred:Re_Xferred+SIZE(Re_PointMesh_Buf)-1 ) = Re_PointMesh_Buf
@@ -2068,6 +2074,10 @@ ENDIF
   IF( ALLOCATED(Re_PointMesh_Buf) )  DEALLOCATE(Re_PointMesh_Buf)
   IF( ALLOCATED(Db_PointMesh_Buf) )  DEALLOCATE(Db_PointMesh_Buf)
   IF( ALLOCATED(Int_PointMesh_Buf) ) DEALLOCATE(Int_PointMesh_Buf)
+  IF ( ALLOCATED(InData%WriteOutput) ) THEN
+    IF ( .NOT. OnlySize ) ReKiBuf ( Re_Xferred:Re_Xferred+(SIZE(InData%WriteOutput))-1 ) =  PACK(InData%WriteOutput ,.TRUE.)
+    Re_Xferred   = Re_Xferred   + SIZE(InData%WriteOutput)
+  ENDIF
  END SUBROUTINE ID_PackOutput
 
  SUBROUTINE ID_UnPackOutput( ReKiBuf, DbKiBuf, IntKiBuf, Outdata, ErrStat, ErrMsg )
@@ -2106,8 +2116,6 @@ ENDIF
   Re_BufSz  = 0
   Db_BufSz  = 0
   Int_BufSz  = 0
-  OutData%fice = ReKiBuf ( Re_Xferred )
-  Re_Xferred   = Re_Xferred   + 1
  ! first call MeshPack to get correctly sized buffers for unpacking
   CALL MeshPack( OutData%PointMesh, Re_PointMesh_Buf, Db_PointMesh_Buf, Int_PointMesh_Buf, ErrStat, ErrMsg , .TRUE. ) ! PointMesh 
   IF(ALLOCATED(Re_PointMesh_Buf)) THEN
@@ -2126,6 +2134,12 @@ ENDIF
   IF( ALLOCATED(Re_PointMesh_Buf) )  DEALLOCATE(Re_PointMesh_Buf)
   IF( ALLOCATED(Db_PointMesh_Buf) )  DEALLOCATE(Db_PointMesh_Buf)
   IF( ALLOCATED(Int_PointMesh_Buf) ) DEALLOCATE(Int_PointMesh_Buf)
+  IF ( ALLOCATED(OutData%WriteOutput) ) THEN
+  ALLOCATE(mask1(SIZE(OutData%WriteOutput,1))); mask1 = .TRUE.
+    OutData%WriteOutput = UNPACK(ReKiBuf( Re_Xferred:Re_Xferred+(SIZE(OutData%WriteOutput))-1 ),mask1,OutData%WriteOutput)
+  DEALLOCATE(mask1)
+    Re_Xferred   = Re_Xferred   + SIZE(OutData%WriteOutput)
+  ENDIF
   Re_Xferred   = Re_Xferred-1
   Db_Xferred   = Db_Xferred-1
   Int_Xferred  = Int_Xferred-1
@@ -2240,8 +2254,6 @@ ENDIF
  endif
  order = SIZE(u) - 1
  IF ( order .eq. 0 ) THEN
-  u_out%q = u(1)%q
-  u_out%dqdt = u(1)%dqdt
   CALL MeshCopy(u(1)%PointMesh, u_out%PointMesh, MESH_UPDATECOPY, ErrStat, ErrMsg )
  ELSE IF ( order .eq. 1 ) THEN
   IF ( EqualRealNos( t(1), t(2) ) ) THEN
@@ -2249,10 +2261,6 @@ ENDIF
     ErrMsg  = ' Error in ID_Input_ExtrapInterp: t(1) must not equal t(2) to avoid a division-by-zero error.'
     RETURN
   END IF
-  b0 = -(u(1)%q - u(2)%q)/t(2)
-  u_out%q = u(1)%q + b0 * t_out
-  b0 = -(u(1)%dqdt - u(2)%dqdt)/t(2)
-  u_out%dqdt = u(1)%dqdt + b0 * t_out
   CALL MeshExtrapInterp1(u(1)%PointMesh, u(2)%PointMesh, tin, u_out%PointMesh, tin_out, ErrStat, ErrMsg )
  ELSE IF ( order .eq. 2 ) THEN
   IF ( EqualRealNos( t(1), t(2) ) ) THEN
@@ -2270,12 +2278,6 @@ ENDIF
     ErrMsg  = ' Error in ID_Input_ExtrapInterp: t(1) must not equal t(3) to avoid a division-by-zero error.'
     RETURN
   END IF
-  b0 = (t(3)**2*(u(1)%q - u(2)%q) + t(2)**2*(-u(1)%q + u(3)%q))/(t(2)*t(3)*(t(2) - t(3)))
-  c0 = ( (t(2)-t(3))*u(1)%q + t(3)*u(2)%q - t(2)*u(3)%q ) / (t(2)*t(3)*(t(2) - t(3)))
-  u_out%q = u(1)%q + b0 * t_out + c0 * t_out**2
-  b0 = (t(3)**2*(u(1)%dqdt - u(2)%dqdt) + t(2)**2*(-u(1)%dqdt + u(3)%dqdt))/(t(2)*t(3)*(t(2) - t(3)))
-  c0 = ( (t(2)-t(3))*u(1)%dqdt + t(3)*u(2)%dqdt - t(2)*u(3)%dqdt ) / (t(2)*t(3)*(t(2) - t(3)))
-  u_out%dqdt = u(1)%dqdt + b0 * t_out + c0 * t_out**2
   CALL MeshExtrapInterp2(u(1)%PointMesh, u(2)%PointMesh, u(3)%PointMesh, tin, u_out%PointMesh, tin_out, ErrStat, ErrMsg )
  ELSE 
    ErrStat = ErrID_Fatal
@@ -2393,17 +2395,25 @@ ENDIF
  endif
  order = SIZE(u) - 1
  IF ( order .eq. 0 ) THEN
-  u_out%fice = u(1)%fice
   CALL MeshCopy(u(1)%PointMesh, u_out%PointMesh, MESH_UPDATECOPY, ErrStat, ErrMsg )
+IF (ALLOCATED(u_out%WriteOutput) .AND. ALLOCATED(u(1)%WriteOutput)) THEN
+  u_out%WriteOutput = u(1)%WriteOutput
+END IF ! check if allocated
  ELSE IF ( order .eq. 1 ) THEN
   IF ( EqualRealNos( t(1), t(2) ) ) THEN
     ErrStat = ErrID_Fatal
     ErrMsg  = ' Error in ID_Output_ExtrapInterp: t(1) must not equal t(2) to avoid a division-by-zero error.'
     RETURN
   END IF
-  b0 = -(u(1)%fice - u(2)%fice)/t(2)
-  u_out%fice = u(1)%fice + b0 * t_out
   CALL MeshExtrapInterp1(u(1)%PointMesh, u(2)%PointMesh, tin, u_out%PointMesh, tin_out, ErrStat, ErrMsg )
+IF (ALLOCATED(u_out%WriteOutput) .AND. ALLOCATED(u(1)%WriteOutput)) THEN
+  ALLOCATE(b1(SIZE(u_out%WriteOutput,1)))
+  ALLOCATE(c1(SIZE(u_out%WriteOutput,1)))
+  b1 = -(u(1)%WriteOutput - u(2)%WriteOutput)/t(2)
+  u_out%WriteOutput = u(1)%WriteOutput + b1 * t_out
+  DEALLOCATE(b1)
+  DEALLOCATE(c1)
+END IF ! check if allocated
  ELSE IF ( order .eq. 2 ) THEN
   IF ( EqualRealNos( t(1), t(2) ) ) THEN
     ErrStat = ErrID_Fatal
@@ -2420,10 +2430,16 @@ ENDIF
     ErrMsg  = ' Error in ID_Output_ExtrapInterp: t(1) must not equal t(3) to avoid a division-by-zero error.'
     RETURN
   END IF
-  b0 = (t(3)**2*(u(1)%fice - u(2)%fice) + t(2)**2*(-u(1)%fice + u(3)%fice))/(t(2)*t(3)*(t(2) - t(3)))
-  c0 = ( (t(2)-t(3))*u(1)%fice + t(3)*u(2)%fice - t(2)*u(3)%fice ) / (t(2)*t(3)*(t(2) - t(3)))
-  u_out%fice = u(1)%fice + b0 * t_out + c0 * t_out**2
   CALL MeshExtrapInterp2(u(1)%PointMesh, u(2)%PointMesh, u(3)%PointMesh, tin, u_out%PointMesh, tin_out, ErrStat, ErrMsg )
+IF (ALLOCATED(u_out%WriteOutput) .AND. ALLOCATED(u(1)%WriteOutput)) THEN
+  ALLOCATE(b1(SIZE(u_out%WriteOutput,1)))
+  ALLOCATE(c1(SIZE(u_out%WriteOutput,1)))
+  b1 = (t(3)**2*(u(1)%WriteOutput - u(2)%WriteOutput) + t(2)**2*(-u(1)%WriteOutput + u(3)%WriteOutput))/(t(2)*t(3)*(t(2) - t(3)))
+  c1 = ( (t(2)-t(3))*u(1)%WriteOutput + t(3)*u(2)%WriteOutput - t(2)*u(3)%WriteOutput ) / (t(2)*t(3)*(t(2) - t(3)))
+  u_out%WriteOutput = u(1)%WriteOutput + b1 * t_out + c1 * t_out**2
+  DEALLOCATE(b1)
+  DEALLOCATE(c1)
+END IF ! check if allocated
  ELSE 
    ErrStat = ErrID_Fatal
    ErrMsg = ' order must be less than 3 in ID_Output_ExtrapInterp '
